@@ -305,7 +305,7 @@ const ProcessingStatus: React.FC<ProcessingStatusProps> = ({
                                         </p>
                                     </div>
                                 </div>
-                                <div className={`px-3 py-1 rounded-full border text-sm font-medium ${getStatusColor(progress.status)}`}>
+                                <div className={`px-3 py-1 rounded-full border flex items-center text-sm font-medium ${getStatusColor(progress.status)}`}>
                                     <span className="mr-1">{getStatusIcon(progress.status)}</span>
                                     {progress.status}
                                 </div>
