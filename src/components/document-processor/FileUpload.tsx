@@ -119,8 +119,15 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
             if (result.success) {
                 const successfulFiles = result.files
-                    .filter((file: any) => file.success)
-                    .map((file: any) => ({
+                    .filter((file: { success: boolean }) => file.success)
+                    .map((file: {
+                        id: string;
+                        originalName: string;
+                        size: number;
+                        type: string;
+                        uploadedAt: string;
+                        filePath: string;
+                    }) => ({
                         id: file.id,
                         name: file.originalName,
                         size: file.size,
@@ -133,9 +140,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 onFilesUploaded(successfulFiles);
 
                 // Show any failed uploads
-                const failedFiles = result.files.filter((file: any) => !file.success);
+                const failedFiles = result.files.filter((file: { success: boolean }) => !file.success);
                 if (failedFiles.length > 0) {
-                    setError(`Some files failed to upload: ${failedFiles.map((f: any) => f.error).join(', ')}`);
+                    setError(`Some files failed to upload: ${failedFiles.map((f: { error: string }) => f.error).join(', ')}`);
                 }
             }
 
@@ -146,7 +153,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         } finally {
             setIsUploading(false);
         }
-    }, [maxFiles, maxFileSize, onFilesUploaded]);
+    }, [maxFiles, maxFileSize, onFilesUploaded, validateFile]);
 
     const handleDragOver = useCallback((e: React.DragEvent) => {
         e.preventDefault();
