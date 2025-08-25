@@ -1,4 +1,2 @@
-ignoredBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - sharp
-  - unrs-resolver
+# This project uses npm instead of pnpm
+# pnpm-workspace.yaml is kept for compatibility but not used
